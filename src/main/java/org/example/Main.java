@@ -28,6 +28,7 @@ public class Main {
                 if(cmd.equals("article write")){
                 int id = lastArticleId +1;
                 lastArticleId = id;
+                String regDate = Util.getNowDateStr();
                 System.out.printf("제목: ");
                 String title = sc.nextLine();
                 System.out.printf("내용: ");
@@ -70,7 +71,7 @@ public class Main {
                     }
 
                     System.out.printf("번호: %d\n",foundArticle.id);
-                    System.out.printf("날짜: %s\n", "2024-03-20 12:12:12");
+                    System.out.printf("날짜: %s\n", foundArticle.regDate);
                     System.out.printf("제목: %s\n",foundArticle.title);
                     System.out.printf("내용: %s\n",foundArticle.body);
                 }
@@ -108,11 +109,13 @@ public class Main {
 }
 class Article{
     int id;
+    String regDate;
     String title;
     String body;
 
     public Article(int id, String title, String body) {
         this.id = id;
+        this.regDate;
         this.title = title;
         this.body = body;
     }
