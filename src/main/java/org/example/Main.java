@@ -9,7 +9,6 @@ public class Main {
 
         System.out.println("== 프로그램 시작 ==");
         Scanner sc = new Scanner(System.in);
-        List<Integer>nums = new ArrayList<>();
 
         int lastArticleId = 0;
         List<Article> articles = new ArrayList<>();
@@ -48,15 +47,7 @@ public class Main {
                     System.out.printf("%d   |  %s\n", article.id, article.title);
                 }
             }
-            else if(cmd.equals("num")){
-                System.out.printf(("숫자: "));
-                int num = sc.nextInt();
-                sc.nextLine();
-                nums.add(num);
-            }
-            else if (cmd.equals("nums")){
-                System.out.printf("숫자들 : %s\n",nums.toString());
-            }
+
             else{
                 System.out.printf("%s는 존재하지 않는 명령어 입니다.\n",cmd);
             }
