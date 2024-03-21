@@ -12,6 +12,7 @@ public class Main {
 
 
         int lastArticleId = 0;
+
         List<Article> articles = new ArrayList<>();
 
         while (true){
@@ -22,13 +23,13 @@ public class Main {
             if(cmd.length()==0){
                 continue;
             }
-            else if (cmd.startsWith("exit")){
+            if (cmd.startsWith("exit")){
                 break;
             }
                 if(cmd.equals("article write")){
                 int id = lastArticleId +1;
                 lastArticleId = id;
-                String regDate = Util.getNowDateStr();
+                String regDate = util.getNowDateStr();
                 System.out.printf("제목: ");
                 String title = sc.nextLine();
                 System.out.printf("내용: ");
@@ -115,7 +116,7 @@ class Article{
 
     public Article(int id, String title, String body) {
         this.id = id;
-        this.regDate;
+        this.regDate = regDate;
         this.title = title;
         this.body = body;
     }
