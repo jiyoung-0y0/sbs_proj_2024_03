@@ -45,14 +45,31 @@ public class App {
                 System.out.printf("%d번 글이 생성되었습니다.\n",id);
 
             }
-            else if (cmd.equals("article list")){
+            else if (cmd.startsWith("article list")){
                 if(articles.size()==0){
                     System.out.println("게시물이 없습니다.");
                     continue;
                 }
+                String searchKeyword = cmd.substring("article list".length()).trim();
+
+                List<Article> forListArticles = articles;
+
+                if (searchKeyword.length()>0){
+                    forListArticles = new ArrayList<>();
+
+                    for (Article article: articles){
+                        if (article.title.contains(searchKeyword)){
+                            forListArticles.add(article);
+                        }
+                    }
+                    if(articles.size()==0){
+                        System.out.println("검색 결과가 존재하지 않습니다.");
+                        continue;
+                    }
+                }
                 System.out.println(" 번호 | 조회 | 제목 ");
-                for(int i = articles.size()-1; i>=0 ; i--){
-                    Article article = articles.get(i);
+                for(int i = forListArticles.size()-1; i>=0 ; i--){
+                    Article article = forListArticles.get(i);
 
                     System.out.printf("%4d | %4d | %s\n", article.id,article.hit, article.title);
 
@@ -61,17 +78,8 @@ public class App {
             else if (cmd.startsWith("article modify")){
                 String[] cmdBits = cmd.split(" ");
                 int id = Integer.parseInt(cmdBits[2]);
+                Article foundArticle = getArticleById(id);
 
-                Article foundArticle = null;
-
-                for (int i=0; i<articles.size(); i++){
-                    Article article = articles.get(i);
-
-                    if(article.id == id){
-                        foundArticle = article;
-                        break;
-                    }
-                }
                 if (foundArticle == null){
                     System.out.printf("%d번 게시물은 존재하지 않습니다.\n",id);
                     continue;
@@ -90,16 +98,9 @@ public class App {
                 String[] cmdBits = cmd.split(" ");
                 int id = Integer.parseInt(cmdBits[2]);
 
-                Article foundArticle = null;
+                Article foundArticle = getArticleById(id);
 
-                for (int i=0; i<articles.size(); i++){
-                    Article article = articles.get(i);
 
-                    if(article.id == id){
-                        foundArticle = article;
-                        break;
-                    }
-                }
                 if (foundArticle == null){
                     System.out.printf("%d번 게시물은 존재하지 않습니다.\n",id);
                     continue;
@@ -117,16 +118,9 @@ public class App {
                 String[] cmdBits = cmd.split(" ");
                 int id = Integer.parseInt(cmdBits[2]);
 
-                int foundIndex = -1;
+                int foundIndex = getArticleIndexById(id);
 
-                for (int i=0; i<articles.size(); i++){
-                    Article article = articles.get(i);
 
-                    if(article.id == id){
-                        foundIndex = -1;
-                        break;
-                    }
-                }
                 if (foundIndex == -1){
                     System.out.printf("%d번 게시물은 존재하지 않습니다.\n",id);
                     continue;
@@ -145,10 +139,29 @@ public class App {
         sc.close();
     }
 
+    private int getArticleIndexById(int id) {
+        int i =0;
+        for(Article article : articles){
+            if (article.id == id){
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    private Article getArticleById(int id) {
+        int index = getArticleIndexById(id);
+        if(index != -1){
+            return articles.get(index);
+            }
+        return null;
+    }
+
     private void makeTestData() {
         System.out.println("테스트를 위한 게시물 데이터를 생성합니다.");
-        articles.add(new Article(1, util.getNowDateStr(), "제목 1", "내용1"));
-        articles.add(new Article(2, util.getNowDateStr(), "제목 2", "내용2"));
-        articles.add(new Article(3, util.getNowDateStr(), "제목 3", "내용3"));
+        articles.add(new Article(1, util.getNowDateStr(), "제목 1", "내용1",12));
+        articles.add(new Article(2, util.getNowDateStr(), "제목 2", "내용2",13));
+        articles.add(new Article(3, util.getNowDateStr(), "제목 3", "내용3",43));
     }
 }
