@@ -3,14 +3,17 @@ package org.example;
 import org.example.dto.Article;
 import org.example.util.util;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
     private List<Article> articles;
+    private List<Article> members;
     public App() {
         articles = new ArrayList<>();
+        members = new ArrayList<>();
     }
     public void start() {
 
@@ -18,6 +21,12 @@ public class App {
         makeTestData();
 
         Scanner sc = new Scanner(System.in);
+        int id = members.size() +1;
+        String regDate = util.getNowDateStr();
+        System.out.printf("로그인 아이디: ");
+        String loginId = sc.nextLine();
+        String loginPw = null;
+        String loginPwConfirm = null;
 
         // article.size();
         while (true){
@@ -25,11 +34,44 @@ public class App {
             String cmd = sc.nextLine();
             cmd = cmd.trim(); // 공백 정렬
 
+            System.out.printf("로그인 비번: ");
+            String loginPw = sc.nextLine();
+            System.out.printf("로그인 비번확인: ");
+            String loginPwConfirm = sc.nextLine();
+
+            if (loginPw.equals(loginPwConfirm)==false){
+                System.out.println("비밀번호가 일치하지 않습니다. 다시 작성해주세요.");
+                continue;
+            }
+            break;
             if(cmd.length()==0){
                 continue;
             }
             if (cmd.startsWith("exit")){
                 break;
+            }
+            if(cmd.equals("member join")){
+                int id = members.size() +1;
+                String regDate = util.getNowDateStr();
+                while (true){
+                    System.out.println("로그인 아이디: ");
+                    String loginId = sc.nextLine();
+                    if (isJoinableLoginId(loginId)==false){
+                        System.out.println("사용중인 로그인 아이디가 아닙니다.");
+                    }
+
+
+                }
+
+                System.out.printf("로그인 아이디: ");
+                String loginId = sc.nextLine();
+                System.out.printf("이름: ");
+                String name = sc.nextLine();
+
+                Member member = new Member(id, regDate, loginId, loginPw, name);
+                members.add(article);
+
+
             }
             if(cmd.equals("article write")){
                 int id = articles.size() +1;
@@ -139,6 +181,19 @@ public class App {
         sc.close();
     }
 
+    private boolean isJoinableLoginId(String loginId) {
+        int index = getMemberIddexByLogin(loginId);
+    }
+    private int getArticleIndexById(int id) {
+        int i =0;
+        for(Member member : members){
+            if (member.loginId.equals()){
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
     private int getArticleIndexById(int id) {
         int i =0;
         for(Article article : articles){
