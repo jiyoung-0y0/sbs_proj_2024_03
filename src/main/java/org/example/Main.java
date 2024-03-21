@@ -12,8 +12,8 @@ public class Main {
     }
     public static void main(String[] args) {
 
-        makeTestData();
         System.out.println("== 프로그램 시작 ==");
+        makeTestData();
 
         Scanner sc = new Scanner(System.in);
 
