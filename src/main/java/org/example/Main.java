@@ -71,9 +71,9 @@ public class Main {
                         continue;
                     }
 
-                    System.out.printf("제목: %s\n",foundArticle.title);
+                    System.out.printf("제목: ");
                     String title = sc.nextLine();
-                    System.out.printf("내용: %s\n",foundArticle.body);
+                    System.out.printf("내용: ");
                     String body = sc.nextLine();
                     foundArticle.title = title;
                     foundArticle.body = body;
