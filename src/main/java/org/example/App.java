@@ -38,7 +38,7 @@ public class App {
                 break;
             }
             String[] cmdBits = cmd.split(" "); // article write
-            String controllerName = cmdBits [0]; // article
+            String controllerName = cmdBits[0]; // article
             String actionMethodName = cmdBits[1]; //
             // article detail 1
             // cmdBits[0]=> article
@@ -46,21 +46,20 @@ public class App {
             // cmdBits[2]=>  1
             Controller controller = null;
 
-            if (controllerName.equals("article")){
+            if (controllerName.equals("article")) {
                 controller = articleController;
             }
-            else if (controllerName.equals("member")){
+            else if (controllerName.equals("member")) {
                 controller = memberController;
             }
             else {
                 System.out.println("존재하지 않는 명령어입니다.");
                 continue;
             }
-           controller.doAction(cmd, actionMethodName);
+            controller.doAction(cmd, actionMethodName);
+        }
 
         sc.close();
         System.out.println("== 프로그램 끝 ==");
     }
     }
-
-}
