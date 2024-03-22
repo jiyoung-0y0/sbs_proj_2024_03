@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.dto.Member;
 import org.example.util.util;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class MemberController extends Controller{
     private List<Member> members;
     private String cmd;
     private String actionMethodName;
+    private  Member loginedMember;
     public MemberController(Scanner sc){
         this.sc = sc;
         members = new ArrayList<>();
@@ -23,8 +25,15 @@ public class MemberController extends Controller{
             case "join":
             dojoin();
             break;
+            case "login":
+                doLogin();
+                break;
+            default:
+                System.out.println("존재하지 않는 명령어 입니다.");
+                break;
         }
-    }
+        }
+
     public void dojoin() {
         int id = members.size() + 1;
         String regDate = util.getNowDateStr();
@@ -66,6 +75,26 @@ public class MemberController extends Controller{
 
         System.out.printf("%d번 회원이 생성되었습니다. 환영합니다!\n", id);
     }
+    public void doLogin(){
+        System.out.println("로그인 아이디: ");
+        String loginId = sc.nextLine();
+        System.out.println("로그인 비번: ");
+        String loginPw = sc.nextLine();
+        // 입력받은 아이디에 해당하는 회원이 존재하는지
+
+        Member member = getMemberByLoginId(loginId);
+        if(member == null){
+            System.out.println("해당회원은 존재하지 않습니다.");
+            return;
+        }
+        if (member.loginPw.equals(loginPw)==false){
+            System.out.println("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+        loginedMember = member;
+        System.out.printf("로그인 성공! %s님 환영합니다.\n",loginedMember.name);
+    }
+
     private boolean isJoinableLoginId(String loginId) {
         int index = getMemberIndexByLoginId(loginId);
 
@@ -87,6 +116,13 @@ public class MemberController extends Controller{
         }
 
         return -1;
+    }
+    private Member getMemberByLoginId(String loginId){
+        int index = getMemberIndexByLoginId(loginId);
+        if (index == -1){
+            return null;
+        }
+        return members.get(index);
     }
 }
 
