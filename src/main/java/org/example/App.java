@@ -22,7 +22,9 @@ public class App {
         Scanner sc = new Scanner(System.in);
         MemberController memberController = new MemberController(sc);
         ArticleController articleController = new ArticleController(sc);
+
         articleController.makeTestData();
+        memberController.makeTestData();
 
         // article.size();
         while (true) {
@@ -38,8 +40,8 @@ public class App {
                 break;
             }
             String[] cmdBits = cmd.split(" "); // article write
-            String controllerName = cmdBits[0]; // article
-            String actionMethodName = cmdBits[1]; //
+            String controllerName = cmdBits[0]; // article / member
+            String actionMethodName = cmdBits[1]; //write / join
             // article detail 1
             // cmdBits[0]=> article
             // cmdBits[1]=> detail
@@ -49,6 +51,7 @@ public class App {
             if (controllerName.equals("article")) {
                 controller = articleController;
             }
+
             else if (controllerName.equals("member")) {
                 controller = memberController;
             }
