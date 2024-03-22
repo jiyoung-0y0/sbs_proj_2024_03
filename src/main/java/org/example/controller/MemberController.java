@@ -14,7 +14,7 @@ public class MemberController extends Controller{
     private List<Member> members;
     private String cmd;
     private String actionMethodName;
-    private  Member loginedMember;
+
     public MemberController(Scanner sc){
         this.sc = sc;
         members = new ArrayList<>();
@@ -94,9 +94,9 @@ public class MemberController extends Controller{
             return;
         }
 
-        System.out.println("로그인 아이디: ");
+        System.out.println("로그인 아이디:");
         String loginId = sc.nextLine();
-        System.out.println("로그인 비번: ");
+        System.out.println("로그인 비번:");
         String loginPw = sc.nextLine();
         // 입력받은 아이디에 해당하는 회원이 존재하는지
 
@@ -113,9 +113,6 @@ public class MemberController extends Controller{
         System.out.printf("로그인 성공! %s님 환영합니다.\n",loginedMember.name);
     }
 
-    private boolean isLogined(){
-        return loginedMember != null;
-    }
 
     private void doLoginout() {
         if (isLogined()==false){
