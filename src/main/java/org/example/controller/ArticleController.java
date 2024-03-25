@@ -19,19 +19,16 @@ public class ArticleController extends Controller {
         articles = new ArrayList<>();
     }
     public void doAction(String cmd, String actionMethodName){
+        this.cmd = cmd;
         this.actionMethodName = actionMethodName;
         switch (actionMethodName){
             case "write":
-                if (isLogined()==false){
-                    System.out.println("로그인 후 이용해주세요");
-                    break;
-                }
                 doWrite();
-                break;
+                    break;
             case "list":
                 showList();
                 break;
-            case "Detail":
+            case "detail":
                 showDetail();
                 break;
             case "modify":
@@ -81,8 +78,8 @@ public class ArticleController extends Controller {
                     forListArticles.add(article);
                 }
             }
-            if (articles.size() == 0) {
-                System.out.println("검색 결과가 존재하지 않습니다.");
+            if ( forListArticles.size() == 0 ) {
+                System.out.println("검색결과가 존재하지 않습니다.");
                 return;
             }
         }
@@ -93,27 +90,6 @@ public class ArticleController extends Controller {
             System.out.printf("%4d | %6d | %4d | %s\n", article.id,article.memberId, article.hit, article.title);
     }
 }
-
-    public void doModify() {
-        String[] cmdBits = cmd.split(" ");
-        int id = Integer.parseInt(cmdBits[2]);
-        Article foundArticle = getArticleById(id);
-
-        if (foundArticle == null) {
-            System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
-            return;
-        }
-
-        System.out.printf("제목: ");
-        String title = sc.nextLine();
-        System.out.printf("내용: ");
-        String body = sc.nextLine();
-        foundArticle.title = title;
-        foundArticle.body = body;
-
-        System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
-    }
-
     public void showDetail() {
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]);
@@ -134,16 +110,45 @@ public class ArticleController extends Controller {
         System.out.printf("내용: %s\n", foundArticle.body);
         System.out.printf("조회: %d\n", foundArticle.hit);
     }
+    public void doModify() {
+        String[] cmdBits = cmd.split(" ");
+        int id = Integer.parseInt(cmdBits[2]);
+        Article foundArticle = getArticleById(id);
+
+        if (foundArticle == null) {
+            System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+            return;
+        }
+        if (foundArticle.memberId != loginedMember.id){
+            System.out.println("권한 없음");
+            return;
+        }
+
+        System.out.printf("제목: ");
+        String title = sc.nextLine();
+        System.out.printf("내용: ");
+        String body = sc.nextLine();
+        foundArticle.title = title;
+        foundArticle.body = body;
+
+        System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
+    }
+
+
 
     public void doDelete() {
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]);
 
-        int foundIndex = getArticleIndexById(id);
+        Article foundArticle = getArticleById(id);
 
 
-        if (foundIndex == -1) {
+        if (foundArticle == null) {
             System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+            return;
+        }
+        if (foundArticle.memberId != loginedMember.id){
+            System.out.println("권한 없음");
             return;
         }
         // size() => 3
