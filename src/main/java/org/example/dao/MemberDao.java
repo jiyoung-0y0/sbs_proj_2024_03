@@ -18,6 +18,5 @@ public class MemberDao extends Dao{
         }
     }
 
-    public int getNewId() {return lastId;
-    }
+    public int getNewId() {return lastId;}
 }
