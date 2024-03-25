@@ -45,9 +45,9 @@ public class MemberController extends Controller{
     public void makeTestData() {
         System.out.println("테스트를 위한 회원 데이터를 생성합니다");
 
-        Container.memberDao.add(new Member(Container.articleDao.getNewId(), util.getNowDateStr(), "admin", "admin", "관리자"));
-        Container.memberDao.add(new Member(Container.articleDao.getNewId(), util.getNowDateStr(), "user1", "user1", "홍길동"));
-        Container.memberDao.add(new Member(Container.articleDao.getNewId(), util.getNowDateStr(), "user2", "user2", "홍길순"));
+        Container.memberDao.add(new Member(Container.memberDao.getNewId(), util.getNowDateStr(), "admin", "admin", "관리자"));
+        Container.memberDao.add(new Member(Container.memberDao.getNewId(), util.getNowDateStr(), "user1", "user1", "홍길동"));
+        Container.memberDao.add(new Member(Container.memberDao.getNewId(), util.getNowDateStr(), "user2", "user2", "홍길순"));
     }
 
     public void dojoin() {
