@@ -11,9 +11,9 @@ public class ArticleDao extends Dao {
     public ArticleDao() {
         articles = new ArrayList<>();
     }
-    public void add(Article article) {
+    public void write (Article article) {
         articles.add(article);
-        lastId++;
+        lastId = article.id;
     }
 
     public List<Article> getArticles() {

@@ -12,11 +12,32 @@ public class MemberDao extends Dao{
         members = new ArrayList<>();
     }
 
-    public void add(Member member) {{
+    public void join(Member member) {{
             members.add(member);
-            lastId++;
+            lastId = member.id;
         }
     }
 
-    public int getNewId() {return lastId;}
+    public int getMemberIndexByLoginId(String loginId) {
+        int i = 0;
+
+        for ( Member member : members ) {
+            if ( member.loginId.equals(loginId) ) {
+                return i;
+            }
+            i++;
+        }
+
+        return -1;
+    }
+
+    public Member getMemberByLoginId(String loginId) {
+        int index = getMemberIndexByLoginId(loginId);
+
+        if ( index == -1 ) {
+            return null;
+        }
+
+        return members.get(index);
+    }
 }
