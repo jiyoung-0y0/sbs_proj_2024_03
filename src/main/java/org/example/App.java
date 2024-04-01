@@ -31,8 +31,8 @@ public class App {
         ArticleController articleController = new ArticleController(sc);
         ExportController exportController = new ExportController(sc);
 
-        articleController.makeTestData();
-        memberController.makeTestData();
+ //       articleController.makeTestData();
+ //       memberController.makeTestData();
 
         // article.size();
         while (true) {

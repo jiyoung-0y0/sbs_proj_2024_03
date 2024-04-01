@@ -8,4 +8,6 @@ import lombok.Setter;
 public class dto {
     public int id;
     public String regDate;
+
+
 }

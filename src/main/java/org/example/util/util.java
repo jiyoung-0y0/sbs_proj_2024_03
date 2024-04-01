@@ -2,15 +2,17 @@ package org.example.util;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class util {
-    public static String getNowDateStr(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date now = new Date();
-        return formatter.format(now);
-
+    // 현재 날짜 저장
+    public static String getNowDateStr() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.toString();
     }
+
+    // 파일에 내용쓰기
     public static void writeFileContents(String filePath, int data) {
         writeFileContents(filePath, data + "");
     }
