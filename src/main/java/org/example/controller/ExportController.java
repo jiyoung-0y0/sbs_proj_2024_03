@@ -28,8 +28,4 @@ public class ExportController extends Controller {
         System.out.println("html를 생성합니다.");
         exportService.makeHtml();
     }
-    @Override
-    public void makeTestData() {
-
-    }
 }
