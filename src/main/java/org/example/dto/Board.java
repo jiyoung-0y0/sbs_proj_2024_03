@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class dto {
-    public int id;
-    public String regDate;
+public class Board extends dto {
+    private String name;
+    private String code;
 }

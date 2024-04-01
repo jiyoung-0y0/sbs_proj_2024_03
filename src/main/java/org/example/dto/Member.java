@@ -1,5 +1,10 @@
 package org.example.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Member extends dto {
 
     public String loginId;
