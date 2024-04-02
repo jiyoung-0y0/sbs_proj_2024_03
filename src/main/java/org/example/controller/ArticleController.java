@@ -57,10 +57,10 @@ public class ArticleController extends Controller {
         System.out.printf("내용: ");
         String body = sc.nextLine();
 
-        int memberId = session.getLoginedMember().getId();
-        int boardId = session.getCurrentBoard().getId();
+        //int memberId = session.getLoginedMember().getId();
+        //int boardId = session.getCurrentBoard().getId();
 
-        int newId = articleService.write(memberId, boardId, title, body);
+        int newId = articleService.write(1, 1, title, body);
 
         System.out.printf("%d번 글이 생성되었습니다.\n", newId);
     }
