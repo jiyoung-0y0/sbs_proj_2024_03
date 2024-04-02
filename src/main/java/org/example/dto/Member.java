@@ -1,5 +1,6 @@
 package org.example.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,18 +8,14 @@ import java.util.Map;
 
 @Getter
 @Setter
+@AllArgsConstructor
+
 public class Member extends dto {
-    public int id;
-    public String regDate;
+
     public String loginId;
     public String loginPw;
     public String name;
 
-    public Member( String loginId, String loginPw, String name) {
-        this.loginId = loginId;
-        this.loginPw = loginPw;
-        this.name = name;
-    }
     public Member(Map<String, Object> row) {
         super(row);
 

@@ -1,12 +1,15 @@
 package org.example.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
+import lombok.NoArgsConstructor;
 import java.util.Map;
 
 @Getter
 @Setter
+@AllArgsConstructor
+
 public class Article extends dto {
     public String title;
     public String body;
@@ -15,8 +18,6 @@ public class Article extends dto {
     public int boardId;
 
     public Article( int memberId, int boardId, String title, String body, int hit) {
-        this.id = id;
-        this.regDate = regDate;
         this.memberId = memberId;
         this.boardId = boardId;
         this.title = title;
@@ -34,6 +35,7 @@ public class Article extends dto {
         this.body = (String) row.get("body");
         this.memberId = (int) row.get("memberId");
         this.boardId = (int) row.get("boardId");
+       // this.hit = (int) row.get("hit");
     }
 
     public void increaseHit() {
