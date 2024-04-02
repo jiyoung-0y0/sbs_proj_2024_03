@@ -20,6 +20,7 @@ public class App {
         DBConnection.DB_PORT = 3306;
 
         Container.getDBConnection().connect();
+        Container.getSession().setCurrentBoard(Container.articleService.getBoard(1));
     }
 
     public void start() {

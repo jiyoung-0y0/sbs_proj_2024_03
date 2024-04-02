@@ -57,13 +57,12 @@ public class ArticleController extends Controller {
         System.out.printf("내용: ");
         String body = sc.nextLine();
 
-        Member loginedMember = session.getLoginedMember();
-        int boardId =1;
+        int memberId = session.getLoginedMember().getId();
+        int boardId = session.getCurrentBoard().getId();
 
-        Article article = new Article(id, regDate,loginedMember.id, boardId, title, body);
-        articleService.write(article);
+        int newId = articleService.write(memberId, boardId, title, body);
 
-        System.out.printf("%d번 글이 생성되었습니다.\n", id);
+        System.out.printf("%d번 글이 생성되었습니다.\n", newId);
     }
     public void showList() {
 
