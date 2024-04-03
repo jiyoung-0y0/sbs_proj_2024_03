@@ -2,13 +2,14 @@ package org.example.dao;
 
 public class Dao {
     protected int lastId;
-    public Dao (){
+    public Dao() {
         lastId = 0;
     }
-    public int getNewId(){
-        return lastId +1;
+    public int getNewId() {
+        return lastId + 1;
     }
-    public  int getLastId(){
+
+    public int getLastId() {
         return lastId;
     }
 }
