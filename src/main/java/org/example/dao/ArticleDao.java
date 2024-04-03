@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ArticleDao extends Dao {
-    private List<Article> articles;
     private DBConnection dbConnection;
 
     public ArticleDao() {
-        articles = new ArrayList<>();
         dbConnection = Container.getDBConnection();
     }
 
@@ -30,7 +28,7 @@ public class ArticleDao extends Dao {
         sb.append(String.format("boardId = %d, ", article.boardId));
         sb.append(String.format("hit = %d ", article.hit));
 
-        return dbConnection.insert((sb.toString()));
+        return dbConnection.insert(sb.toString());
     }
     public Article getForPrintArticle(int id) {
         StringBuilder sb = new StringBuilder();
@@ -43,11 +41,13 @@ public class ArticleDao extends Dao {
 
         Map<String, Object> row = dbConnection.selectRow(sb.toString());
 
-        if (row.isEmpty()) {
+        if ( row.isEmpty() ) {
             return null;
         }
+
         return new Article(row);
     }
+
     public List<Article> getArticles() {
         StringBuilder sb = new StringBuilder();
 
@@ -56,25 +56,13 @@ public class ArticleDao extends Dao {
         List<Article> articles = new ArrayList<>();
         List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
 
-        for (Map<String, Object> row : rows) {
+        for ( Map<String, Object> row : rows ) {
             articles.add(new Article((row)));
         }
 
         return articles;
     }
 
-    public List<Article> getForPrintArticles(String searchKeyword) {
-        if (searchKeyword != null && searchKeyword.length() != 0) {
-            List<Article> forListArticles = new ArrayList<>();
-            for (Article article : articles) {
-                if (article.title.contains(searchKeyword)) {
-                    forListArticles.add(article);
-                }
-            }
-            return forListArticles;
-        }
-        return articles;
-    }
     public Article getArticle(int id) {
         StringBuilder sb = new StringBuilder();
 
@@ -84,14 +72,15 @@ public class ArticleDao extends Dao {
 
         Map<String, Object> row = dbConnection.selectRow(sb.toString());
 
-        if (row.isEmpty()) {
+        if ( row.isEmpty() ) {
             return null;
         }
-        return new Article(row);
 
+        return new Article(row);
     }
-    public void remove(Article foundArticle) {
-        articles.remove(foundArticle);
+
+    public List<Article> getForPrintArticles(String searchKeyword) {
+        return null;
     }
 
     public Board getBoard(int id) {
@@ -103,9 +92,10 @@ public class ArticleDao extends Dao {
 
         Map<String, Object> row = dbConnection.selectRow(sb.toString());
 
-        if (row.isEmpty()) {
+        if ( row.isEmpty() ) {
             return null;
         }
+
         return new Board(row);
     }
 
@@ -120,6 +110,7 @@ public class ArticleDao extends Dao {
 
         return dbConnection.update(sb.toString());
     }
+
 
     public int delete(int id) {
         StringBuilder sb = new StringBuilder();
