@@ -54,7 +54,7 @@ public class ArticleService {
       return articleDao.replyWrite(articleId, memberId, replyBody);
     }
 
-    public List<ArticleReply> getForPrintArticleRepiles(int articleId) {
+    public List<ArticleReply> getForPrintArticleReplies(int articleId) {
         return articleDao.getForPrintArticleReplies(articleId);
     }
 }
